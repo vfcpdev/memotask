@@ -17,8 +17,8 @@
 | **Nombre del paquete** | `memo_task` (`pubspec.yaml:1`) |
 | **Título de aplicación** | `MemoTask · Agenda Estudiantil` / `MemoTask · Student Agenda` (`l10n` ARB) |
 | **Versión** | `1.0.0+1` (`pubspec.yaml:19`) |
-| **SDK / Plataforma** | Dart `^3.12.0` + Flutter Material 3; target configurado para Android (`applicationId: com.memotask.memo_task`, `minSdk`/`targetSdk` de Flutter, JVM/Kotlin 17 en `android/app/build.gradle.kts`) |
-| **Modelo de ejecución** | Aplicación móvil **offline-first** con base de datos SQLite local (`memotask.sqlite` en `getApplicationDocumentsDirectory()`) y exportación local de archivos |
+| **SDK / Plataforma** | Dart `^3.12.0` + Flutter Material 3; targets configurados para Android (`applicationId: com.memotask.memo_task`, JVM/Kotlin 17) y Web (`web/`, Chrome) |
+| **Modelo de ejecución** | Aplicación **offline-first** multiplataforma: SQLite local (`memotask.sqlite`) en móvil/escritorio y `localStorage` + descarga de archivos en Web mediante imports condicionales (`platform_bootstrap.dart`) |
 | **Gestión de estado** | `flutter_bloc ^9.1.0` + `equatable ^2.0.7` (`AgendaBloc`, modelo unidireccional Evento → Estado vía puertos DIP) |
 | **Persistencia** | `drift ^2.28.0` + `sqlite3_flutter_libs ^0.5.32` + `path_provider ^2.1.5` + `path ^1.9.1` |
 | **Utilidades** | `intl ^0.20.2`, `uuid ^4.5.1`, `cupertino_icons ^1.0.8` |
@@ -38,9 +38,10 @@
    - **Algoritmos y Estructuras (`algorithms/`)**: `ConflictReport`, `ConflictDetector` (sweep-line $O(n \log n + k)$), `HeapQueue<T>`, `PriorityMinHeap` ($O(\log n)/O(1)$), `CourseIndex` ($O(1)$) y `DayScheduleIndex` ($O(n)/O(1)$).
 
 2. **Capa de Datos (`lib/data/`)**:
+   - **Bootstrap Condicional (`platform/platform_bootstrap.dart`)**: Selecciona implementaciones nativas (`dart.library.io`) o Web (`dart.library.js_interop`) evitando fugas de `dart:ffi`/`dart:io` al compilar para Chrome/Web.
    - **Fuente de datos (`datasources/app_database.dart` y `.g.dart`)**: Esquema Drift v1 con `@DataClassName('CourseRow')`, `@DataClassName('ActivityRow')`, FK `course_id -> courses.id`, `PRAGMA foreign_keys = ON` e índices en `start` y `course_id`.
-   - **Repositorio (`repositories/drift_schedule_repository.dart`)**: `DriftScheduleRepository` implementando `IScheduleRepository`.
-   - **Gateway (`services/local_export_gateway.dart`)**: `LocalExportGateway` implementando `IExportGateway` con `ExportStrategyFactory`.
+   - **Repositorios (`repositories/`)**: `DriftScheduleRepository` (SQLite) y `WebScheduleRepository` (`localStorage` + respaldo en memoria) implementando `IScheduleRepository`.
+   - **Gateways (`services/`)**: `LocalExportGateway` (archivo en disco) y `WebExportGateway` (descarga en navegador) implementando `IExportGateway` con `ExportStrategyFactory`.
 
 3. **Capa de Presentación (`lib/presentation/`, `lib/app.dart`, `lib/main.dart`)**:
    - **Composition Root (`lib/app.dart`, `lib/main.dart`)**: Inyección de `IScheduleRepository`, `IExportGateway`, `AppLocalizations` y `AppTheme.theme()`.
