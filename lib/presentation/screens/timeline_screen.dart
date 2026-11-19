@@ -8,6 +8,7 @@ import '../bloc/agenda_bloc.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../theme/app_design_tokens.dart';
 import '../widgets/activity_card.dart';
+import '../widgets/user_name_dialog.dart';
 
 /// Vista Timeline escaneable con filtro por día O(1) y próxima prioridad O(1).
 class TimelineScreen extends StatelessWidget {
@@ -33,6 +34,33 @@ class TimelineScreen extends StatelessWidget {
 
         return Column(
           children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                tokens.spaceMd,
+                tokens.spaceSm,
+                tokens.spaceMd,
+                0,
+              ),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: state.userProfile == null
+                    ? ActionChip(
+                        avatar: const Icon(Icons.person_add_outlined, size: 18),
+                        label: Text(l10n.registerNamePrompt),
+                        onPressed: () => UserNameDialog.showAndSubmit(context),
+                      )
+                    : ActionChip(
+                        avatar: const Icon(Icons.person_outline, size: 18),
+                        label: Text(
+                          l10n.greetingUser(state.userProfile!.name),
+                        ),
+                        onPressed: () => UserNameDialog.showAndSubmit(
+                          context,
+                          initialName: state.userProfile!.name,
+                        ),
+                      ),
+              ),
+            ),
             Padding(
               padding: EdgeInsets.fromLTRB(
                 tokens.spaceMd,

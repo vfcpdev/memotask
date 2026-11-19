@@ -21,5 +21,7 @@ String localizeAgendaFailure(AppLocalizations l10n, AgendaFailure failure) {
       return l10n.errorEmptyExport;
     case AgendaErrorCode.exportFailed:
       return l10n.errorExportFailed;
+    case AgendaErrorCode.profileSaveFailed:
+      return l10n.errorProfileSaveFailed;
   }
 }

@@ -186,4 +186,27 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get errorExportFailed => 'Error al exportar la agenda';
+
+  @override
+  String get profileTooltip => 'Perfil';
+
+  @override
+  String get userNameDialogTitle => 'Tu nombre';
+
+  @override
+  String get userNameLabel => 'Nombre';
+
+  @override
+  String get saveNameCta => 'Guardar';
+
+  @override
+  String get registerNamePrompt => 'Registra tu nombre';
+
+  @override
+  String greetingUser(String name) {
+    return 'Hola, $name';
+  }
+
+  @override
+  String get errorProfileSaveFailed => 'Error al guardar el nombre';
 }

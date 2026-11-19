@@ -9,6 +9,7 @@ enum AgendaErrorCode {
   courseSaveFailed,
   emptyExport,
   exportFailed,
+  profileSaveFailed,
 }
 
 /// Falla estructurada e internacionalizable emitida por [AgendaBloc].

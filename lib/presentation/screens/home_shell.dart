@@ -7,6 +7,7 @@ import '../l10n/failure_localizer.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../widgets/course_form_dialog.dart';
 import '../widgets/new_activity_fab.dart';
+import '../widgets/user_name_dialog.dart';
 import 'export_screen.dart';
 import 'timeline_screen.dart';
 import 'week_calendar_screen.dart';
@@ -51,6 +52,23 @@ class _HomeShellState extends State<HomeShell> {
         appBar: AppBar(
           title: Text(titles[_index]),
           actions: [
+            Builder(
+              builder: (ctx) {
+                final userName = ctx.select(
+                  (AgendaBloc b) => b.state.userProfile?.name,
+                );
+                return IconButton(
+                  tooltip: l10n.profileTooltip,
+                  icon: Icon(
+                    userName == null ? Icons.person_outline : Icons.person,
+                  ),
+                  onPressed: () => UserNameDialog.showAndSubmit(
+                    ctx,
+                    initialName: userName,
+                  ),
+                );
+              },
+            ),
             IconButton(
               tooltip: l10n.manageCourseTooltip,
               icon: const Icon(Icons.school_outlined),

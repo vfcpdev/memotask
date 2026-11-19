@@ -118,5 +118,17 @@
   "errorDeleteFailed": "Error al eliminar la actividad",
   "errorCourseSaveFailed": "Error al guardar el curso",
   "errorEmptyExport": "No hay actividades para exportar",
-  "errorExportFailed": "Error al exportar la agenda"
+  "errorExportFailed": "Error al exportar la agenda",
+  "profileTooltip": "Perfil",
+  "userNameDialogTitle": "Tu nombre",
+  "userNameLabel": "Nombre",
+  "saveNameCta": "Guardar",
+  "registerNamePrompt": "Registra tu nombre",
+  "greetingUser": "Hola, {name}",
+  "@greetingUser": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "errorProfileSaveFailed": "Error al guardar el nombre"
 }

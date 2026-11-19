@@ -4,6 +4,7 @@ import '../../domain/algorithms/conflict_report.dart';
 import '../../domain/algorithms/day_schedule_index.dart';
 import '../../domain/entities/activity.dart';
 import '../../domain/entities/course.dart';
+import '../../domain/entities/user_profile.dart';
 import 'agenda_failure.dart';
 
 /// Estado inmutable de [AgendaBloc] con índices precalculados O(1).
@@ -14,6 +15,7 @@ class AgendaState extends Equatable {
   final DateTime? selectedDay;
   final Activity? nextUrgentActivity;
   final ConflictReport conflictReport;
+  final UserProfile? userProfile;
   final bool loading;
   final AgendaFailure? failure;
   final String? exportedFilePath;
@@ -25,6 +27,7 @@ class AgendaState extends Equatable {
     this.selectedDay,
     this.nextUrgentActivity,
     this.conflictReport = const ConflictReport.empty(),
+    this.userProfile,
     this.loading = false,
     this.failure,
     this.exportedFilePath,
@@ -49,6 +52,7 @@ class AgendaState extends Equatable {
     Activity? nextUrgentActivity,
     bool clearNextUrgent = false,
     ConflictReport? conflictReport,
+    UserProfile? userProfile,
     bool? loading,
     AgendaFailure? failure,
     bool clearFailure = false,
@@ -64,6 +68,7 @@ class AgendaState extends Equatable {
           ? null
           : (nextUrgentActivity ?? this.nextUrgentActivity),
       conflictReport: conflictReport ?? this.conflictReport,
+      userProfile: userProfile ?? this.userProfile,
       loading: loading ?? this.loading,
       failure: clearFailure ? null : (failure ?? this.failure),
       exportedFilePath: clearExportedFilePath
@@ -80,6 +85,7 @@ class AgendaState extends Equatable {
         selectedDay,
         nextUrgentActivity,
         conflictReport,
+        userProfile,
         loading,
         failure,
         exportedFilePath,

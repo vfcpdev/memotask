@@ -3,6 +3,8 @@ class AppConfig {
   const AppConfig._();
 
   static const String databaseFileName = 'memotask.sqlite';
+  static const String defaultProfileId = 'primary';
+  static const int maxUserNameLength = 60;
 
   static const int minPriority = 1;
   static const int maxPriority = 3;

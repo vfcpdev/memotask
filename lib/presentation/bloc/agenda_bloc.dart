@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/algorithms/schedule_algorithms.dart';
 import '../../domain/entities/activity.dart';
 import '../../domain/entities/course.dart';
+import '../../domain/entities/user_profile.dart';
 import '../../domain/repositories/export_gateway_interface.dart';
 import '../../domain/repositories/schedule_repository_interface.dart';
+import '../../domain/repositories/user_profile_repository_interface.dart';
+import '../../domain/usecases/register_user_name.dart';
 import '../../domain/usecases/schedule_activity.dart';
 import 'agenda_event.dart';
 import 'agenda_failure.dart';
@@ -17,14 +20,18 @@ export 'agenda_state.dart';
 /// BLoC de agenda estudiantil desacoplado de Data mediante puertos DIP.
 class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
   final IScheduleRepository repository;
+  final IUserProfileRepository userProfileRepository;
   final IExportGateway exportGateway;
   final ScheduleActivity scheduleActivity;
+  final RegisterUserName registerUserName;
   final ConflictDetector conflictDetector;
 
   AgendaBloc({
     required this.repository,
+    required this.userProfileRepository,
     required this.exportGateway,
     this.scheduleActivity = const ScheduleActivity(),
+    this.registerUserName = const RegisterUserName(),
     this.conflictDetector = const ConflictDetector(),
   }) : super(const AgendaState()) {
     on<AgendaLoaded>(_onLoaded);
@@ -34,6 +41,7 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
     on<AgendaDaySelected>(_onDaySelected);
     on<AgendaExportRequested>(_onExportRequested);
     on<AgendaFeedbackCleared>(_onFeedbackCleared);
+    on<AgendaUserNameRegistered>(_onUserNameRegistered);
   }
 
   // {P} true
@@ -46,8 +54,14 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
       final sorted = [...loadedActivities]
         ..sort((a, b) => a.start.compareTo(b.start));
       final courses = await repository.getCourses();
+      final profile = await userProfileRepository.getProfile();
       final courseMap = {for (final c in courses) c.id: c};
-      emit(_buildDerivedState(sorted, courseMap).copyWith(loading: false));
+      emit(
+        _buildDerivedState(sorted, courseMap).copyWith(
+          loading: false,
+          userProfile: profile,
+        ),
+      );
     } catch (e) {
       emit(
         state.copyWith(
@@ -212,6 +226,29 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
     Emitter<AgendaState> emit,
   ) {
     emit(state.copyWith(clearFailure: true, clearExportedFilePath: true));
+  }
+
+  // {P} event.name.trim().isNotEmpty ∧ event.name.trim().length <= AppConfig.maxUserNameLength
+  // C   _onUserNameRegistered(event, emit)
+  // {Q} (¬P => failure.code == profileSaveFailed) ∧ (P => persisted(profile) ∧ state'.userProfile == profile)
+  Future<void> _onUserNameRegistered(
+    AgendaUserNameRegistered event,
+    Emitter<AgendaState> emit,
+  ) async {
+    try {
+      final UserProfile profile = registerUserName(event.name);
+      await userProfileRepository.saveProfile(profile);
+      emit(state.copyWith(userProfile: profile, clearFailure: true));
+    } catch (e) {
+      emit(
+        state.copyWith(
+          failure: AgendaFailure(
+            code: AgendaErrorCode.profileSaveFailed,
+            detail: e.toString(),
+          ),
+        ),
+      );
+    }
   }
 
   AgendaState _buildDerivedState(

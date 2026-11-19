@@ -186,4 +186,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorExportFailed => 'Failed to export agenda';
+
+  @override
+  String get profileTooltip => 'Profile';
+
+  @override
+  String get userNameDialogTitle => 'Your name';
+
+  @override
+  String get userNameLabel => 'Name';
+
+  @override
+  String get saveNameCta => 'Save';
+
+  @override
+  String get registerNamePrompt => 'Register your name';
+
+  @override
+  String greetingUser(String name) {
+    return 'Hi, $name';
+  }
+
+  @override
+  String get errorProfileSaveFailed => 'Failed to save name';
 }

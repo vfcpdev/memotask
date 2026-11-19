@@ -63,3 +63,12 @@ class AgendaExportRequested extends AgendaEvent {
 class AgendaFeedbackCleared extends AgendaEvent {
   const AgendaFeedbackCleared();
 }
+
+class AgendaUserNameRegistered extends AgendaEvent {
+  final String name;
+
+  const AgendaUserNameRegistered(this.name);
+
+  @override
+  List<Object?> get props => [name];
+}

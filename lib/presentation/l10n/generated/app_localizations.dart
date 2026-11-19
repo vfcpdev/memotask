@@ -396,6 +396,48 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Error al exportar la agenda'**
   String get errorExportFailed;
+
+  /// No description provided for @profileTooltip.
+  ///
+  /// In es, this message translates to:
+  /// **'Perfil'**
+  String get profileTooltip;
+
+  /// No description provided for @userNameDialogTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu nombre'**
+  String get userNameDialogTitle;
+
+  /// No description provided for @userNameLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre'**
+  String get userNameLabel;
+
+  /// No description provided for @saveNameCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardar'**
+  String get saveNameCta;
+
+  /// No description provided for @registerNamePrompt.
+  ///
+  /// In es, this message translates to:
+  /// **'Registra tu nombre'**
+  String get registerNamePrompt;
+
+  /// No description provided for @greetingUser.
+  ///
+  /// In es, this message translates to:
+  /// **'Hola, {name}'**
+  String greetingUser(String name);
+
+  /// No description provided for @errorProfileSaveFailed.
+  ///
+  /// In es, this message translates to:
+  /// **'Error al guardar el nombre'**
+  String get errorProfileSaveFailed;
 }
 
 class _AppLocalizationsDelegate
