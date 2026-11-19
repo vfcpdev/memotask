@@ -1,0 +1,122 @@
+{
+  "@@locale": "es",
+  "appTitle": "MemoTask · Agenda Estudiantil",
+  "tabTimeline": "Timeline",
+  "tabCalendar": "Calendario",
+  "tabExport": "Exportar",
+  "emptyTimelineMessage": "Sin actividades para mostrar.\nToca + para agendar.",
+  "filterAll": "Todas",
+  "filterToday": "Hoy",
+  "nextUrgentLabel": "Prioritaria: {title}",
+  "@nextUrgentLabel": {
+    "placeholders": {
+      "title": { "type": "String" }
+    }
+  },
+  "conflictsBanner": "{count} conflictos detectados",
+  "@conflictsBanner": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "weekOfLabel": "Semana del {date}",
+  "@weekOfLabel": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "activitiesCountShort": "{count} act.",
+  "@activitiesCountShort": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "dayActivitiesSemantics": "{count} actividades el {day}",
+  "@dayActivitiesSemantics": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "day": { "type": "String" }
+    }
+  },
+  "activityCardSemantics": "{title}, {course}, de {start} a {end}",
+  "@activityCardSemantics": {
+    "placeholders": {
+      "title": { "type": "String" },
+      "course": { "type": "String" },
+      "start": { "type": "String" },
+      "end": { "type": "String" }
+    }
+  },
+  "exportTitle": "Exportar agenda",
+  "exportCount": "{count} actividades",
+  "@exportCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "exportCountSemantics": "{count} actividades disponibles para exportar",
+  "@exportCountSemantics": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "exportIcsCta": "Exportar .ics",
+  "exportCsvCta": "Exportar .csv",
+  "exportedPathLabel": "Archivo: {path}",
+  "@exportedPathLabel": {
+    "placeholders": {
+      "path": { "type": "String" }
+    }
+  },
+  "exportedSnackBar": "Exportado a: {path}",
+  "@exportedSnackBar": {
+    "placeholders": {
+      "path": { "type": "String" }
+    }
+  },
+  "newActivityTitle": "Nueva actividad",
+  "newActivityTooltip": "Agendar nueva actividad",
+  "deleteActivityTooltip": "Eliminar actividad",
+  "manageCourseTooltip": "Registrar curso",
+  "newCourseTitle": "Curso",
+  "courseIdLabel": "Código del curso",
+  "courseNameLabel": "Nombre del curso",
+  "courseProfessorLabel": "Docente",
+  "saveCourseCta": "Guardar",
+  "titleLabel": "Título",
+  "descriptionLabel": "Descripción",
+  "requiredFieldError": "Campo obligatorio",
+  "startLabel": "Inicio: {dateTime}",
+  "@startLabel": {
+    "placeholders": {
+      "dateTime": { "type": "String" }
+    }
+  },
+  "endLabel": "Fin: {dateTime}",
+  "@endLabel": {
+    "placeholders": {
+      "dateTime": { "type": "String" }
+    }
+  },
+  "priorityLabel": "Prioridad",
+  "priorityHigh": "1 - Alta",
+  "priorityMedium": "2 - Media",
+  "priorityLow": "3 - Baja",
+  "reminderLabel": "Recordatorio",
+  "scheduleCta": "Agendar",
+  "cancelCta": "Cancelar",
+  "invalidTimeRangeError": "El inicio debe ser anterior al fin",
+  "errorLoadFailed": "Error al cargar la agenda",
+  "errorScheduleConflict": "Conflicto: \"{incoming}\" solapa con \"{existing}\"",
+  "@errorScheduleConflict": {
+    "placeholders": {
+      "incoming": { "type": "String" },
+      "existing": { "type": "String" }
+    }
+  },
+  "errorScheduleFailed": "Error al agendar la actividad",
+  "errorDeleteFailed": "Error al eliminar la actividad",
+  "errorCourseSaveFailed": "Error al guardar el curso",
+  "errorEmptyExport": "No hay actividades para exportar",
+  "errorExportFailed": "Error al exportar la agenda"
+}

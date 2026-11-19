@@ -1,0 +1,122 @@
+{
+  "@@locale": "en",
+  "appTitle": "MemoTask · Student Agenda",
+  "tabTimeline": "Timeline",
+  "tabCalendar": "Calendar",
+  "tabExport": "Export",
+  "emptyTimelineMessage": "No activities to display.\nTap + to schedule one.",
+  "filterAll": "All",
+  "filterToday": "Today",
+  "nextUrgentLabel": "Priority: {title}",
+  "@nextUrgentLabel": {
+    "placeholders": {
+      "title": { "type": "String" }
+    }
+  },
+  "conflictsBanner": "{count} conflicts detected",
+  "@conflictsBanner": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "weekOfLabel": "Week of {date}",
+  "@weekOfLabel": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "activitiesCountShort": "{count} act.",
+  "@activitiesCountShort": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "dayActivitiesSemantics": "{count} activities on {day}",
+  "@dayActivitiesSemantics": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "day": { "type": "String" }
+    }
+  },
+  "activityCardSemantics": "{title}, {course}, from {start} to {end}",
+  "@activityCardSemantics": {
+    "placeholders": {
+      "title": { "type": "String" },
+      "course": { "type": "String" },
+      "start": { "type": "String" },
+      "end": { "type": "String" }
+    }
+  },
+  "exportTitle": "Export agenda",
+  "exportCount": "{count} activities",
+  "@exportCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "exportCountSemantics": "{count} activities available to export",
+  "@exportCountSemantics": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "exportIcsCta": "Export .ics",
+  "exportCsvCta": "Export .csv",
+  "exportedPathLabel": "File: {path}",
+  "@exportedPathLabel": {
+    "placeholders": {
+      "path": { "type": "String" }
+    }
+  },
+  "exportedSnackBar": "Exported to: {path}",
+  "@exportedSnackBar": {
+    "placeholders": {
+      "path": { "type": "String" }
+    }
+  },
+  "newActivityTitle": "New activity",
+  "newActivityTooltip": "Schedule new activity",
+  "deleteActivityTooltip": "Delete activity",
+  "manageCourseTooltip": "Add course",
+  "newCourseTitle": "Course",
+  "courseIdLabel": "Course code",
+  "courseNameLabel": "Course name",
+  "courseProfessorLabel": "Instructor",
+  "saveCourseCta": "Save",
+  "titleLabel": "Title",
+  "descriptionLabel": "Description",
+  "requiredFieldError": "Required field",
+  "startLabel": "Start: {dateTime}",
+  "@startLabel": {
+    "placeholders": {
+      "dateTime": { "type": "String" }
+    }
+  },
+  "endLabel": "End: {dateTime}",
+  "@endLabel": {
+    "placeholders": {
+      "dateTime": { "type": "String" }
+    }
+  },
+  "priorityLabel": "Priority",
+  "priorityHigh": "1 - High",
+  "priorityMedium": "2 - Medium",
+  "priorityLow": "3 - Low",
+  "reminderLabel": "Reminder",
+  "scheduleCta": "Schedule",
+  "cancelCta": "Cancel",
+  "invalidTimeRangeError": "Start must be before end",
+  "errorLoadFailed": "Failed to load agenda",
+  "errorScheduleConflict": "Conflict: \"{incoming}\" overlaps with \"{existing}\"",
+  "@errorScheduleConflict": {
+    "placeholders": {
+      "incoming": { "type": "String" },
+      "existing": { "type": "String" }
+    }
+  },
+  "errorScheduleFailed": "Failed to schedule activity",
+  "errorDeleteFailed": "Failed to delete activity",
+  "errorCourseSaveFailed": "Failed to save course",
+  "errorEmptyExport": "No activities to export",
+  "errorExportFailed": "Failed to export agenda"
+}
