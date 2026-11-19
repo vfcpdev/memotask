@@ -1,4 +1,4 @@
-﻿import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:memo_task/domain/algorithms/schedule_algorithms.dart';
 import 'package:memo_task/domain/config/app_config.dart';
 import 'package:memo_task/domain/entities/activity.dart';
