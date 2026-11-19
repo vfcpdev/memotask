@@ -40,7 +40,7 @@ flowchart LR
 ```mermaid
 flowchart TB
     subgraph UI["UI / Presentation Layer (Flutter Material 3 + l10n + AppDesignTokens)"]
-        Screens["TimelineScreen / WeekCalendarScreen / ExportScreen / ActivityForm"]
+        Screens["TimelineScreen / WeekCalendarScreen / ExportScreen / ActivityFormModal"]
         Theme["AppTheme + AppDesignTokens"]
     end
 
@@ -50,16 +50,16 @@ flowchart TB
 
     subgraph Domain["Domain Layer (Dart Puro — Cero Flutter/Drift)"]
         Entities["Activity / Course"]
-        Algorithms["ConflictDetector / PriorityMinHeap / CourseIndex"]
+        Algorithms["ConflictDetector / PriorityMinHeap / DayScheduleIndex / CourseIndex"]
         UseCases["ScheduleActivity / BuildExportFile"]
         Strategies["ExportStrategy / ExportStrategyFactory / ICS / CSV"]
         Ports["Interfaces DIP: IScheduleRepository / IExportGateway"]
     end
 
-    subgraph Data["Data Layer (Drift SQLite + File I/O)"]
-        RepoImpl["DriftScheduleRepository"]
-        ExportImpl["LocalExportGateway"]
-        DB["AppDatabase (Courses, Activities)"]
+    subgraph Data["Data Layer (Platform Bootstrap: Drift SQLite IO / Web localStorage)"]
+        RepoImpl["DriftScheduleRepository / WebScheduleRepository"]
+        ExportImpl["LocalExportGateway / WebExportGateway"]
+        DB["AppDatabase (Courses, Activities) / Web localStorage"]
     end
 
     Screens -->|"Dispatch Events / Observe State"| Bloc
@@ -190,6 +190,19 @@ classDiagram
         +exportToFile(...) Future~String~
     }
 
+    class WebScheduleRepository {
+        +getCourses() Future~List~Course~~
+        +upsertCourse(Course course) Future~void~
+        +getActivities() Future~List~Activity~~
+        +insertActivity(Activity activity) Future~void~
+        +deleteActivity(String id) Future~void~
+    }
+
+    class WebExportGateway {
+        +ExportStrategyFactory factory
+        +exportToFile(...) Future~String~
+    }
+
     class AppDatabase {
         +int schemaVersion
         +Courses courses
@@ -241,13 +254,17 @@ classDiagram
     }
 
     IScheduleRepository <|.. DriftScheduleRepository
+    IScheduleRepository <|.. WebScheduleRepository
     IExportGateway <|.. LocalExportGateway
+    IExportGateway <|.. WebExportGateway
     ExportStrategy <|-- IcsExportStrategy
     ExportStrategy <|-- CsvExportStrategy
     ExportStrategyFactory --> ExportStrategy : creates
     BuildExportFile --> ExportStrategy : uses
     LocalExportGateway --> ExportStrategyFactory : resolves
     LocalExportGateway --> BuildExportFile : executes
+    WebExportGateway --> ExportStrategyFactory : resolves
+    WebExportGateway --> BuildExportFile : executes
     DriftScheduleRepository --> AppDatabase : persists
     AgendaBloc --> IScheduleRepository : depends on
     AgendaBloc --> IExportGateway : depends on
